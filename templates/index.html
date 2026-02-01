@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Score Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-credit-card me-2"></i>
+                Credit Score Predictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-calculator me-2"></i>
+                            Credit Score Assessment
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Please fill in all the fields below to get your credit score prediction.
+                        </div>
+
+                        <form id="creditForm">
+                            <!-- Personal Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="border-bottom pb-2 text-primary">
+                                        <i class="fas fa-user me-2"></i>Personal Information
+                                    </h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" required min="18" max="100">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="occupation" class="form-label">Occupation</label>
+                                    <select class="form-select" id="occupation" name="occupation" required>
+                                        <option value="">Select Occupation</option>
+                                        <option value="Scientist">Scientist</option>
+                                        <option value="Teacher">Teacher</option>
+                                        <option value="Engineer">Engineer</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Lawyer">Lawyer</option>
+                                        <option value="Unknown">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Financial Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="border-bottom pb-2 text-primary">
+                                        <i class="fas fa-dollar-sign me-2"></i>Financial Information
+                                    </h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="annual_income" class="form-label">Annual Income ($)</label>
+                                    <input type="number" class="form-control" id="annual_income" name="annual_income" required min="0" step="0.01" placeholder="e.g., 75000">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="monthly_salary" class="form-label">Monthly In-hand Salary ($)</label>
+                                    <input type="number" class="form-control" id="monthly_salary" name="monthly_salary" required min="0" step="0.01" placeholder="e.g., 5500">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="monthly_balance" class="form-label">Monthly Balance ($)</label>
+                                    <input type="number" class="form-control" id="monthly_balance" name="monthly_balance" required step="0.01">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="monthly_investment" class="form-label">Amount Invested Monthly ($)</label>
+                                    <input type="number" class="form-control" id="monthly_investment" name="monthly_investment" required min="0" step="0.01">
+                                </div>
+                            </div>
+
+                            <!-- Banking Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="border-bottom pb-2 text-primary">
+                                        <i class="fas fa-university me-2"></i>Banking & Credit Information
+                                    </h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="num_bank_accounts" class="form-label">Number of Bank Accounts</label>
+                                    <input type="number" class="form-control" id="num_bank_accounts" name="num_bank_accounts" required min="0" max="20">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="num_credit_cards" class="form-label">Number of Credit Cards</label>
+                                    <input type="number" class="form-control" id="num_credit_cards" name="num_credit_cards" required min="0" max="20">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="interest_rate" class="form-label">Interest Rate (%)</label>
+                                    <input type="number" class="form-control" id="interest_rate" name="interest_rate" required min="0" max="50" step="0.01">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="credit_utilization" class="form-label">Credit Utilization Ratio (%)</label>
+                                    <small class="form-text text-muted d-block mb-2">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Percentage of credit limit currently used (e.g., $500 used of $1000 limit = 50%)
+                                    </small>
+                                    <input type="number" class="form-control" id="credit_utilization" name="credit_utilization" required min="0" max="100" step="0.01" placeholder="e.g., 30">
+                                    <div class="form-text mt-1">
+                                        <small>💡 <strong>Best Practice:</strong> Keep below 30% for good credit health</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Loan Information -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="border-bottom pb-2 text-primary">
+                                        <i class="fas fa-hand-holding-usd me-2"></i>Loan & Payment Information
+                                    </h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="num_loans" class="form-label">Number of Loans</label>
+                                    <input type="number" class="form-control" id="num_loans" name="num_loans" required min="0" max="20">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="emi_per_month" class="form-label">Total EMI per Month ($)</label>
+                                    <input type="number" class="form-control" id="emi_per_month" name="emi_per_month" required min="0" step="0.01">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="outstanding_debt" class="form-label">Outstanding Debt ($)</label>
+                                    <input type="number" class="form-control" id="outstanding_debt" name="outstanding_debt" required min="0" step="0.01">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="credit_limit_change" class="form-label">Changed Credit Limit ($)</label>
+                                    <input type="number" class="form-control" id="credit_limit_change" name="credit_limit_change" required step="0.01">
+                                </div>
+                            </div>
+
+                            <!-- Payment Behavior -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <h5 class="border-bottom pb-2 text-primary">
+                                        <i class="fas fa-history me-2"></i>Payment History & Behavior
+                                    </h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="delay_days" class="form-label">Delay from Due Date (days)</label>
+                                    <input type="number" class="form-control" id="delay_days" name="delay_days" required min="0" max="365">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="delayed_payments" class="form-label">Number of Delayed Payments</label>
+                                    <input type="number" class="form-control" id="delayed_payments" name="delayed_payments" required min="0" max="50">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="credit_inquiries" class="form-label">Number of Credit Inquiries</label>
+                                    <input type="number" class="form-control" id="credit_inquiries" name="credit_inquiries" required min="0" max="20">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="credit_history_years" class="form-label">Credit History Age (Years)</label>
+                                    <input type="number" class="form-control" id="credit_history_years" name="credit_history_years" required min="0" max="50">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="credit_mix" class="form-label">Credit Mix</label>
+                                    <small class="form-text text-muted d-block mb-2">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Quality of your credit portfolio (mix of credit cards, loans, etc.)
+                                    </small>
+                                    <select class="form-select" id="credit_mix" name="credit_mix" required>
+                                        <option value="">Select Credit Mix Quality</option>
+                                        <option value="Good">Good (Diverse mix of credit types)</option>
+                                        <option value="Standard">Standard (Average credit variety)</option>
+                                        <option value="Bad">Bad (Limited or poor credit mix)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="payment_min_amount" class="form-label">Payment of Minimum Amount</label>
+                                    <small class="form-text text-muted d-block mb-2">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Do you typically pay only the minimum required amount on credit cards?
+                                    </small>
+                                    <select class="form-select" id="payment_min_amount" name="payment_min_amount" required>
+                                        <option value="">Select Your Payment Habit</option>
+                                        <option value="Yes">Yes (I usually pay only minimum amounts)</option>
+                                        <option value="No">No (I pay more than minimum amounts)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="payment_behaviour" class="form-label">Payment Behaviour</label>
+                                    <small class="form-text text-muted d-block mb-2">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Describe your typical spending and payment patterns based on your credit card usage
+                                    </small>
+                                    <select class="form-select" id="payment_behaviour" name="payment_behaviour" required>
+                                        <option value="">Select Your Payment Pattern</option>
+                                        <option value="High_spent_Small_value_payments">High Spending + Small Payments (Spend a lot, pay minimum amounts)</option>
+                                        <option value="High_spent_Medium_value_payments">High Spending + Medium Payments (Spend a lot, pay moderate amounts)</option>
+                                        <option value="High_spent_Large_value_payments">High Spending + Large Payments (Spend a lot, pay large amounts)</option>
+                                        <option value="Low_spent_Small_value_payments">Low Spending + Small Payments (Spend little, pay small amounts)</option>
+                                        <option value="Low_spent_Medium_value_payments">Low Spending + Medium Payments (Spend little, pay moderate amounts)</option>
+                                        <option value="Low_spent_Large_value_payments">Low Spending + Large Payments (Spend little, pay large amounts)</option>
+                                    </select>
+                                    <div class="form-text mt-1">
+                                        <small>
+                                            💡 <strong>Tip:</strong> Choose the option that best matches your monthly credit card spending habits and payment amounts
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    Predict Credit Score
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="results" class="mt-4" style="display: none;">
+                            <div class="alert alert-success">
+                                <h5 class="alert-heading">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Prediction Results
+                                </h5>
+                                <hr>
+                                <div id="prediction-content"></div>
+                            </div>
+                        </div>
+
+                        <!-- Loading Section -->
+                        <div id="loading" class="text-center mt-4" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Analyzing your credit profile...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Credit Score Predictor. Built with Machine Learning for Financial Analysis.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('creditForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Debug: Log form data
+            console.log('Submitting form data:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+            
+            // Submit form
+            fetch('/predict', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                // Check if response is ok
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                // Check if response has content
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Response is not valid JSON');
+                }
+                
+                return response.json();
+            })
+            .then(data => {
+                console.log('Received data:', data);
+                document.getElementById('loading').style.display = 'none';
+                
+                if (data.error) {
+                    showError('Prediction Error: ' + data.error);
+                } else {
+                    displayResults(data);
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading').style.display = 'none';
+                console.error('Error details:', error);
+                showError('Connection Error: ' + error.message + '. Please make sure the model is trained and the server is running properly.');
+            });
+        });
+        
+        function showError(message) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('prediction-content');
+            
+            resultsDiv.className = 'mt-4 alert alert-danger';
+            contentDiv.innerHTML = `
+                <h5 class="alert-heading">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Error
+                </h5>
+                <p>${message}</p>
+                <hr>
+                <p class="mb-0">
+                    <small>
+                        <strong>Troubleshooting:</strong><br>
+                        1. Make sure you ran <code>python train_and_save_model.py</code> first<br>
+                        2. Check that all form fields are filled correctly<br>
+                        3. Ensure the Flask server is running properly
+                    </small>
+                </p>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('prediction-content');
+            
+            // Reset to success styling
+            resultsDiv.className = 'mt-4 alert alert-success';
+            
+            let probabilityHtml = '';
+            if (data.probabilities) {
+                probabilityHtml = '<div class="row mt-3">';
+                for (const [score, prob] of Object.entries(data.probabilities)) {
+                    const percentage = (prob * 100).toFixed(1);
+                    probabilityHtml += `
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h6>${score}</h6>
+                                <div class="progress">
+                                    <div class="progress-bar bg-${getColorForScore(score)}" style="width: ${percentage}%"></div>
+                                </div>
+                                <small>${percentage}%</small>
+                            </div>
+                        </div>
+                    `;
+                }
+                probabilityHtml += '</div>';
+            }
+            
+            contentDiv.innerHTML = `
+                <h5 class="alert-heading">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Prediction Results
+                </h5>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Predicted Credit Score:</h6>
+                        <span class="badge bg-${data.risk_color} fs-6">${data.prediction}</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Risk Level:</h6>
+                        <span class="badge bg-${data.risk_color} fs-6">${data.risk_level}</span>
+                    </div>
+                </div>
+                <p class="mt-3">${data.risk_description}</p>
+                ${probabilityHtml}
+            `;
+            
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getColorForScore(score) {
+            switch(score) {
+                case 'Good': return 'success';
+                case 'Standard': return 'warning';
+                case 'Poor': return 'danger';
+                default: return 'secondary';
+            }
+        }
+    </script>
+</body>
+</html>
