@@ -69,7 +69,7 @@ In the modern financial landscape, credit assessment is crucial but time-consumi
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/credit-score-classifier.git
+git clone https://github.com/Mahabub21/credit-score-classifier.git
 cd credit-score-classifier
 ```
 
@@ -116,7 +116,7 @@ python app.py
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/yourusername/credit-score-classifier.git
+   git clone https://github.com/Mahabub21/credit-score-classifier.git
    cd credit-score-classifier
    ```
 
@@ -494,19 +494,28 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors & Acknowledgments
 
-- **👤 Your Name** - *Initial work* - [@YourGitHub](https://github.com/yourusername)
+- **👤 Mahabub Ahmed Kowsar** - *Initial work* - [@Mahabub21](https://github.com/Mahabub21)
+  - 🎓 Final-year Computer Science and Engineering student at North South University
+  - 💻 Experienced in Machine Learning, Web Development, and Database Management
+  - 🌐 Portfolio: [mahabub21.github.io/Portfolio](https://mahabub21.github.io/Portfolio/)
+  - 💼 LinkedIn: [linkedin.com/in/mahabub-ahmed-kowsar-505220328](https://linkedin.com/in/mahabub-ahmed-kowsar-505220328)
 
 ### 🙏 Special Thanks
 - **🏦 Finance Industry Experts** - Domain knowledge and validation
 - **🤖 Machine Learning Community** - Open source libraries and tools
 - **🌐 Web Development Community** - Frontend frameworks and best practices
+- **🎓 North South University** - Educational support and guidance
+- **🏢 Creative IT Institute** - Python and Machine Learning training
 
 ## 📞 Support & Contact
 
-- **📧 Email**: your.email@domain.com
-- **💬 Issues**: [GitHub Issues](https://github.com/yourusername/credit-score-classifier/issues)
-- **📖 Documentation**: [Project Wiki](https://github.com/yourusername/credit-score-classifier/wiki)
-- **💬 Discussions**: [GitHub Discussions](https://github.com/yourusername/credit-score-classifier/discussions)
+- **📧 Email**: [mahabubkowsar21@gmail.com](mailto:mahabubkowsar21@gmail.com)
+- **📱 Phone**: +8801307141820
+- **💼 LinkedIn**: [Mahabub Ahmed Kowsar](https://linkedin.com/in/mahabub-ahmed-kowsar-505220328)
+- **🌐 Portfolio**: [mahabub21.github.io/Portfolio](https://mahabub21.github.io/Portfolio/)
+- **💬 Issues**: [GitHub Issues](https://github.com/Mahabub21/credit-score-classifier/issues)
+- **📖 Documentation**: [Project Wiki](https://github.com/Mahabub21/credit-score-classifier/wiki)
+- **💬 Discussions**: [GitHub Discussions](https://github.com/Mahabub21/credit-score-classifier/discussions)
 
 ---
 
